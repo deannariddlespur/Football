@@ -5,6 +5,7 @@ from django.db import models
 
 class Team(models.Model):
     name = models.CharField(max_length=200)
+    coach = models.ForeignKey('Coach', blank=True, null=True)
 
     def __unicode__(self):
         return self.name
@@ -17,3 +18,10 @@ class Player(models.Model):
 
     def __unicode__(self):
         return u"{name} {team}".format(name=self.name, team=self.team.name)
+
+
+class Coach(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.name
