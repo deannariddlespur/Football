@@ -1,14 +1,17 @@
-from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
+from .models import Player, Team
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+
+class PlayerSerializer(serializers.ModelSerializer):
+    team_string = serializers.CharField(source='team.name')
+
     class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'groups')
+        model = Player
+        fields = ('pk', 'name', 'team', 'team_string')
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
+class TeamSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Group
-        fields = ('url', 'name')
+        model = Team
+        fields = ('pk', 'name')
